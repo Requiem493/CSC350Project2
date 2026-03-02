@@ -146,9 +146,19 @@ public class KMeansClusterer {
 	/**
 	 * Return the minimum Within-Clusters Sum-of-Squares measure for the chosen k number of clusters.
 	 * @return the minimum Within-Clusters Sum-of-Squares measure
+	 * WCSS tells us how tight the clusters are. Lower is better.
 	 */
 	public double getWCSS() {
 		// TODO - implement
+		// use getDistance() in a loop that takes in every data point, finds distance
+		// to the centroid of the cluster it is assigned to
+		// sum the squares for all data points and return sum
+		double wcss = 0;
+		for (int i = 0; i < data.length; i++) {
+			double dist = getDistance(data[i], centroids[clusters[i]]);
+			wcss += dist * dist;
+		}
+		return wcss;
 	}
 
 	/**
