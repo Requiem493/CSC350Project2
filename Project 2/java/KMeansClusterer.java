@@ -241,6 +241,38 @@ public class KMeansClusterer {
 	 */
 	public void kMeansCluster() {
 		// TODO - implement
+		double bestWCSS = Double.MAX_VALUE;
+		int[] bestClusters = null;
+		double[][] bestCentroids = null;
+		for (int k = kMin; k <= kMax; k++) {
+			this.k = k;
+			for (int i = 0; i < iter; i++) {
+				// Forgy initialization
+				clusters = new int[data.length];
+				ArrayList<Integer> indices = new ArrayList<Integer>();
+				for (int j = 0; j < data.length; j++)
+					indices.add(j);
+				Collections.shuffle(indices, random);
+				centroids = new double[k][dim];
+				for (int j = 0; j < k; j++)
+					centroids[j] = data[indices.get(j)];
+
+				boolean changed;
+				do {
+					changed = assignNewClusters();
+					computeNewCentroids();
+				} while (changed);
+
+				double wcss = getWCSS();
+				if (wcss < bestWCSS) {
+					bestWCSS = wcss;
+					bestClusters = clusters.clone();
+					bestCentroids = centroids.clone();
+				}
+			}
+		}
+		clusters = bestClusters;
+		centroids = bestCentroids;
 	}
 
 	/**
