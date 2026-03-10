@@ -10,7 +10,18 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "args": "-k 2 -in easygaussian1.dat -out  easygaussian1-out.dat"
+
+            //Uncomment the args you want to use for a specific part. Make sure to comment out the others
+            //Make sure to change the input and output file names as needed for each part
+
+            //Part 1 Args(KMeansClusterer.java)
+            //"args": "-k 2 -in stretched2.dat -out  stretched2-out.dat"
+
+            //Part 2 Args(AugmentedVersionKMeans.java)
+            "args": "-k 2 -iter 10 -in bullseye2.dat -out bullseye2-out.dat"
+            
+            //Part 3 Args(GapKMeans.java)
+            //"args": "-kmin 2 -kmax 10 -iter 10 -in bullseye2.dat -out bullseye2-out.dat"
         }
     ]
 }
